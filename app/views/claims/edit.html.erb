@@ -1,0 +1,26 @@
+<% content_for :title, "Editing claim" %>
+
+<div class="container mx-auto px-4">
+  <!-- Header Section -->
+  <div class="mb-8">
+    <h1 class="text-2xl md:text-3xl font-bold text-gray-900 mb-2">Update Claim</h1>
+    <p class="text-gray-600">Please fill out all required fields to submit your claim</p>
+  </div>
+
+  <!-- Form and Buttons Section -->
+  <div class="bg-white rounded-lg shadow mb-8 w-full">
+    <div class="p-6">
+      <%= render "edit_form", claim: @claim %>
+    </div>
+  </div>
+
+  <!-- Premiums Section -->
+  <div class="bg-white rounded-lg shadow w-full">
+    <div class="p-6">
+      <h2 class="text-xl font-semibold text-gray-900 mb-6" id="premiums">Premiums</h2>
+      <div class="grid grid-cols-3 gap-4">  
+        <%= render @premiums %>
+      </div>
+    </div>
+  </div>
+</div>

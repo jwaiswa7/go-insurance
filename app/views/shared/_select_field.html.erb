@@ -1,0 +1,11 @@
+<%= form.label field_name, label_text, class: "block text-sm font-medium text-gray-700" %>
+<%= form.select field_name, 
+    options,
+    { include_blank: placeholder },
+    { 
+      required: required,
+      multiple: multiple,
+      class: "block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white text-gray-900 text-sm hover:border-gray-400 transition-colors duration-200",
+      data: data
+    }
+%>

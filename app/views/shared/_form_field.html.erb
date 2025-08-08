@@ -1,0 +1,10 @@
+<%= form.label field_name, label_text, class: "block text-sm font-medium text-gray-700" %>
+<%= form.send field_type,
+    field_name,
+    {
+      required: required,
+      class: "block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white text-gray-900 text-sm hover:border-gray-400 transition-colors duration-200",
+      data: data,
+      **options
+    }
+%>

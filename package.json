@@ -1,0 +1,22 @@
+{
+  "name": "go_insurance",
+  "version": "1.0.0",
+  "description": "- Docker compose build - Docker compose up",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "scripts": {
+    "test": "playwright test",
+    "test:e2e": "playwright test e2e"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "@playwright/test": "^1.54.2",
+    "playwright": "^1.54.2"
+  }
+}

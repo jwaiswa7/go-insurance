@@ -1,0 +1,15 @@
+FROM mcr.microsoft.com/playwright:v1.42.1-focal
+
+WORKDIR /tests
+
+# Copy package files
+COPY package.json package-lock.json ./
+
+# Install dependencies
+RUN npm ci
+
+# Copy test files
+COPY e2e ./e2e
+
+# Set the default command
+CMD ["npm", "run", "test"]

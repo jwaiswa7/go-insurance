@@ -1,0 +1,76 @@
+<%= form_with(model: claim, class: "contents", data: { controller: "edit-claim-form"}) do |form| %>
+  <% if claim.errors.any? %>
+    <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-md mt-3">
+      <h2><%= pluralize(claim.errors.count, "error") %> prohibited this claim from being saved:</h2>
+
+      <ul class="list-disc ml-6">
+        <% claim.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="mx-auto grid grid-cols-2 gap-4">
+    <div class="space-y-2">
+      <div class="flex items-center gap-3">
+        <%= form.label :has_cruise, "", class: "block text-sm font-medium text-gray-700", data: { edit_claim_form_target: "cruiseLabel" } %>
+        <label class="relative inline-flex cursor-pointer items-center">
+          <%= form.check_box :has_cruise, 
+              class: "peer sr-only",
+              data: {
+                edit_claim_form_target: "hasCruise",
+                action: "change->edit-claim-form#setCruiseText"
+              }
+          %>
+          <div class="peer h-6 w-11 rounded-full border bg-slate-200 after:absolute after:left-[2px] after:top-0.5 after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-slate-800 peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:ring-green-300"></div>
+        </label>
+      </div>
+    </div>
+
+    <div class="space-y-2">
+      <%= form.label :snows, "Snow", class: "block text-sm font-medium text-gray-700" %>
+      <%= form.fields_for :claim_snow do |snow_form| %>
+        <div class="space-y-2">
+          <%= render "shared/form_field",
+              form: snow_form,
+              field_type: :date_field,
+              field_name: :start_date,
+              label_text: "Start Date",
+              required: false,
+              options: { min: claim.trip_start_date, max: claim.trip_end_date },
+              data: { 
+                edit_claim_form_target: "startDate",
+                action: "change->edit-claim-form#setEndDate"
+              }
+          %>
+        </div>
+        <div class="space-y-2">
+          <%= render "shared/form_field",
+              form: snow_form,
+              field_type: :date_field,
+              field_name: :end_date,
+              label_text: "End Date",
+              required: false,
+              options: { min: claim.trip_start_date, max: claim.trip_end_date },
+              data: { edit_claim_form_target: "endDate" }
+          %>
+        </div>
+        <div class="mt-2">
+          <%= snow_form.hidden_field :id %>
+          <%= snow_form.hidden_field :_destroy, data: { edit_claim_form_target: "snowDestroy" } %>
+          <button type="button" class="text-red-600 hover:text-red-800 text-sm font-medium" 
+                  data-action="click->edit-claim-form#removeSnow">
+            Remove Snow Cover
+          </button>
+        </div>
+      <% end %>
+    </div>
+    
+    <div class="col-span-2">
+      <div class="mt-4">
+        <%= form.submit class: "w-full sm:w-auto rounded-md px-2 py-1 text-sm bg-blue-600 hover:bg-blue-500 text-white inline-block font-medium cursor-pointer" %>
+      </div>
+    </div>
+  </div>
+<% end %>
